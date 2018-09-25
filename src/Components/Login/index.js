@@ -22,7 +22,7 @@ class Login extends Component {
     return (
       <div style={{ height: "100%" }}>
         <Error open={this.props.data.error}>
-          <p>{this.props.data.error_msg}</p>
+          <p>Error en login, usuario o contraseña vacía</p>
         </Error>
         <Grid
           style={{ height: "100%" }}
@@ -32,10 +32,8 @@ class Login extends Component {
           <Grid.Column style={{ maxWidth: 500 }}>
             <Image src="/logo.svg" size="tiny" centered />
             <Header as="h2" style={{ marginTop: 0 }}>
-              MercaTEC
-              <Header.Subheader>
-                Desarrollo de applicaciones web
-              </Header.Subheader>
+              Hooked
+              <Header.Subheader>Mejores sugerencias</Header.Subheader>
             </Header>
             <Segment raised>
               <Input
@@ -44,6 +42,7 @@ class Login extends Component {
                 iconPosition="left"
                 placeholder="Email"
                 type="email"
+                onChange={e => Ctrl.setValue.bind(this, e, "email")()}
               >
                 <Icon name="at" />
                 <input />
@@ -54,6 +53,7 @@ class Login extends Component {
                 placeholder="Password"
                 type="password"
                 style={{ marginBottom: 10 }}
+                onChange={e => Ctrl.setValue.bind(this, e, "password")()}
               >
                 <Icon name="lock" />
                 <input />
