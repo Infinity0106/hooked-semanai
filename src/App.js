@@ -1,21 +1,48 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Redirect
+} from "react-router-dom";
+import { connect } from "react-redux";
+
+import Home from "./Components/Home";
+import Login from "./Components/Login";
+// import NotFound from "./Components/NotFound";
 
 class App extends Component {
+  componentWillMount() {}
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div style={{ height: "100%" }}>
+          <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/"
+            component={() => {
+              return this.props.data.token != null ? (
+                <Home />
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/login"
+                  }}
+                />
+              );
+            }}
+          />
+          {/* <Route component={NotFound} /> */}
+        </div>
+      </Router>
     );
   }
 }
 
-export default App;
+export default connect(store => {
+  return {
+    data: store.login
+  };
+})(App);
