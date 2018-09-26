@@ -16,7 +16,7 @@ class Products extends Component {
         {this.props.logged_in && <Header>Productos recomendados</Header>}
         <Header as="h1">Productos</Header>
         <Grid padded centered columns={3}>
-          <Product />
+          <Product name={"hello"} />
           <Product />
           <Product />
           <Product />

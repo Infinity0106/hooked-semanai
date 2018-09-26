@@ -11,18 +11,11 @@ export function addToWishList() {
   });
 }
 
-export function renderWishlist(logged_in) {
-  console.log("🛠🛠🛠🛠🛠");
-  console.log(this);
-  console.log("🛠🛠🛠🛠🛠");
-  return logged_in
-    ? {
-        as: "a",
-        corner: "left",
-        icon: "heart",
-        color: null,
-        size: "big",
-        onClick: addToWishList.bind(this)
-      }
-    : null;
+export function addToCart() {
+  this.props.dispatch(dispatch => {
+    dispatch({
+      type: "ADD_PRODUCT_TO_CART",
+      value: this.props.product
+    });
+  });
 }

@@ -15,10 +15,17 @@ class Product extends Component {
         <Card>
           <Image
             src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-            label={Ctrl.renderWishlist.bind(this, this.props.logged_in)}
+            label={{
+              as: "a",
+              corner: "left",
+              icon: "heart",
+              color: "red",
+              size: "big",
+              onClick: Ctrl.addToWishList.bind(this)
+            }}
           />
           <Card.Content>
-            <Card.Header>Matthew</Card.Header>
+            <Card.Header>{this.props.name}</Card.Header>
             <Card.Meta>
               <span className="date">Joined in 2015</span>
             </Card.Meta>
@@ -29,7 +36,7 @@ class Product extends Component {
           <Card.Content
             extra
             as="a"
-            onClick={() => alert("hello")}
+            onClick={Ctrl.addToCart.bind(this)}
             textAlign="right"
           >
             Agregar al carrito
