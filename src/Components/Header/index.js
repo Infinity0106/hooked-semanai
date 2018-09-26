@@ -11,7 +11,6 @@ import {
 } from "semantic-ui-react";
 import * as Ctrl from "./ctrl";
 import { withRouter } from "react-router-dom";
-import Link from "react-router-dom/Link";
 
 class Header extends Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class Header extends Component {
   componentWillMount() {}
   render() {
     return (
-      <Segment inverted attached basic borderless>
+      <Segment inverted attached basic>
         <Menu inverted pointing secondary>
           <Container>
             <Menu.Item
