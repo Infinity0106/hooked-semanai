@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Grid, Image, Menu, Header } from "semantic-ui-react";
+import { Container, Grid, Menu, Header } from "semantic-ui-react";
+
+import * as Ctrl from "./ctrl";
+
+import WorkInfo from "./work_info";
+import BasicInfo from "./basic_info";
+import AddEvent from "./add_event";
+import AddProduct from "./add_product";
 
 class Account extends Component {
   constructor(props) {
@@ -17,35 +24,50 @@ class Account extends Component {
             <Grid.Column width={3}>
               <Menu pointing secondary vertical>
                 <Menu.Item
-                  name="home"
-                  active={false}
-                  onClick={() => {
-                    alert("hello");
-                  }}
+                  name="Informacion basica"
+                  active={this.props.data.active === "basic"}
+                  data_value="basic"
+                  onClick={Ctrl.setValue.bind(this)}
                 />
                 <Menu.Item
-                  name="messages"
-                  active={true}
-                  onClick={() => {
-                    alert("hello");
-                  }}
+                  name="Informacion trabajo"
+                  active={this.props.data.active === "work"}
+                  data_value="work"
+                  onClick={Ctrl.setValue.bind(this)}
                 />
                 <Menu.Item
-                  name="friends"
-                  active={false}
-                  onClick={() => {
-                    alert("hello");
-                  }}
+                  name="Mis eventos"
+                  active={this.props.data.active === "events"}
+                  data_value="events"
+                  onClick={Ctrl.setValue.bind(this)}
+                />
+                <Menu.Item
+                  name="Mis productos"
+                  active={this.props.data.active === "products"}
+                  data_value="products"
+                  onClick={Ctrl.setValue.bind(this)}
                 />
               </Menu>
             </Grid.Column>
-            <Grid.Column width={13}>
-              <Image src="https://react.semantic-ui.com/images/wireframe/centered-paragraph.png" />
-            </Grid.Column>
+            <Grid.Column width={13}>{this.renderBodyContent()}</Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
     );
+  }
+  renderBodyContent() {
+    switch (this.props.data.active) {
+      case "basic":
+        return <BasicInfo />;
+      case "work":
+        return <WorkInfo />;
+      case "events":
+        return <AddEvent />;
+      case "products":
+        return <AddProduct />;
+      default:
+        return null;
+    }
   }
   componentDidMount() {}
   componentWillUnmount() {}
@@ -53,7 +75,6 @@ class Account extends Component {
 
 export default connect(store => {
   return {
-    // data: store.nameElementStore
-    data: null
+    data: store.account
   };
 })(Account);
