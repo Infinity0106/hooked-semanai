@@ -4,13 +4,14 @@ import {
   BrowserRouter as Router,
   Link,
   Route,
-  Redirect
+  Redirect,
+  Switch
 } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Home from "./Components/Home";
 import Login from "./Components/Login";
-// import NotFound from "./Components/NotFound";
+import NotFound from "./Components/NotFound";
 
 class App extends Component {
   componentWillMount() {}
@@ -18,23 +19,25 @@ class App extends Component {
     return (
       <Router>
         <div style={{ height: "100%" }}>
-          <Route exact path="/login" component={Login} />
-          <Route
-            exact
-            path="/"
-            component={() => {
-              return this.props.data.token != null ? (
-                <Home />
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: "/login"
-                  }}
-                />
-              );
-            }}
-          />
-          {/* <Route component={NotFound} /> */}
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route
+              exact
+              path="/"
+              component={() => {
+                return this.props.data.token != null ? (
+                  <Home />
+                ) : (
+                  <Redirect
+                    to={{
+                      pathname: "/login"
+                    }}
+                  />
+                );
+              }}
+            />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     );
