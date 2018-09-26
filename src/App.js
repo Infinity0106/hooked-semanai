@@ -21,21 +21,7 @@ class App extends Component {
         <div style={{ height: "100%" }}>
           <Switch>
             <Route exact path="/login" component={Login} />
-            <Route
-              exact
-              path="/"
-              component={() => {
-                return this.props.data.token != null ? (
-                  <Home />
-                ) : (
-                  <Redirect
-                    to={{
-                      pathname: "/login"
-                    }}
-                  />
-                );
-              }}
-            />
+            <Route path="/" component={Home} />
             <Route component={NotFound} />
           </Switch>
         </div>
