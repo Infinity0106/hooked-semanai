@@ -11,7 +11,22 @@ export function logOut() {
 }
 
 export function menuClick(e, { data_path, data_key }) {
-  console.log("🛠🛠🛠🛠🛠");
-  console.log(e, data_path, data_key);
-  console.log("🛠🛠🛠🛠🛠");
+  let self = this;
+  this.props.dispatch(dispatch => {
+    self.props.history.push(data_path);
+    dispatch({
+      type: "SET_HEADER_VALUE",
+      key: "active",
+      value: data_key
+    });
+  });
+}
+
+export function accountClick(e) {
+  this.props.history.push("/account");
+}
+
+export function logIn() {
+  window.location.reload();
+  this.props.history.push("/login");
 }
