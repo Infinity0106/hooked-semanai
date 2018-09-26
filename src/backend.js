@@ -102,5 +102,8 @@ carbonldp.extendObjectSchema("Producto", {
     },
     "marca": {
         "@type": "string"
+    },
+    "modelo": {
+        "@type": "string"
     }
 })
