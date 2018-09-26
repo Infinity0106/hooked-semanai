@@ -7,7 +7,8 @@ import {
   Icon,
   Image,
   Header,
-  Button
+  Button,
+  Divider
 } from "semantic-ui-react";
 import Error from "./../Error";
 import Ctrl from "./ctrl";
@@ -37,38 +38,95 @@ class Login extends Component {
                 Mejores sugerencias, mejores compras
               </Header.Subheader>
             </Header>
-            <Segment raised>
-              <Input
-                style={{ marginBottom: 10 }}
-                fluid
-                iconPosition="left"
-                placeholder="Email"
-                type="email"
-                autoFocus
-                onChange={e => Ctrl.setValue.bind(this, e, "email")()}
-              >
-                <Icon name="at" />
-                <input />
-              </Input>
-              <Input
-                fluid
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-                style={{ marginBottom: 10 }}
-                onChange={e => Ctrl.setValue.bind(this, e, "password")()}
-              >
-                <Icon name="lock" />
-                <input />
-              </Input>
-              <Button positive fluid onClick={Ctrl.login.bind(this)}>
-                Login
-              </Button>
-            </Segment>
+            <Segment raised>{this.renderForm()}</Segment>
           </Grid.Column>
         </Grid>
       </div>
     );
+  }
+
+  renderForm() {
+    if (!this.props.data.signed) {
+      return (
+        <div>
+          <Input
+            style={{ marginBottom: 10 }}
+            fluid
+            iconPosition="left"
+            placeholder="Email"
+            type="email"
+            autoFocus
+            onChange={e => Ctrl.setValue.bind(this, e, "email")()}
+          >
+            <Icon name="at" />
+            <input />
+          </Input>
+          <Input
+            fluid
+            iconPosition="left"
+            placeholder="Password"
+            type="password"
+            style={{ marginBottom: 10 }}
+            onChange={e => Ctrl.setValue.bind(this, e, "password")()}
+          >
+            <Icon name="lock" />
+            <input />
+          </Input>
+          <Button secondary fluid onClick={Ctrl.login.bind(this)}>
+            Login
+          </Button>
+          <Divider horizontal>OR</Divider>
+          <Button positive fluid onClick={Ctrl.signup.bind(this)}>
+            Signup
+          </Button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Input
+            style={{ marginBottom: 10 }}
+            fluid
+            iconPosition="left"
+            placeholder="Full name"
+            type="text"
+            autoFocus
+          >
+            <Icon name="user" />
+            <input />
+          </Input>
+          <Input
+            style={{ marginBottom: 10 }}
+            fluid
+            iconPosition="left"
+            placeholder="Email"
+            type="email"
+            onChange={e => Ctrl.setValue.bind(this, e, "email")()}
+          >
+            <Icon name="at" />
+            <input />
+          </Input>
+          <Input
+            fluid
+            iconPosition="left"
+            placeholder="Password"
+            type="password"
+            style={{ marginBottom: 10 }}
+            onChange={e => Ctrl.setValue.bind(this, e, "password")()}
+          >
+            <Icon name="lock" />
+            <input />
+          </Input>
+          <Button secondary fluid onClick={Ctrl.login.bind(this)}>
+            Signup
+          </Button>
+          <Divider horizontal>OR</Divider>
+          <Button positive fluid onClick={Ctrl.signup.bind(this)}>
+            Login
+          </Button>
+        </div>
+      );
+    }
   }
   componentDidMount() {}
   componentWillUnmount() {}

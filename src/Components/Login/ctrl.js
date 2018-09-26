@@ -8,7 +8,7 @@ export default {
           key: "token",
           value: "1234567890"
         });
-        self.props.history.push("/");
+        self.props.history.replace("/");
       } else {
         dispatch({
           type: "SET_LOGIN_VALUE",
@@ -30,6 +30,13 @@ export default {
       type: "SET_LOGIN_VALUE",
       key: key,
       value: event.target.value
+    });
+  },
+  signup: function() {
+    this.props.dispatch({
+      type: "SET_LOGIN_VALUE",
+      key: "signed",
+      value: !this.props.data.signed
     });
   }
 };
