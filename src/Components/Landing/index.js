@@ -7,7 +7,8 @@ import {
   Icon,
   Sidebar,
   Menu,
-  Checkbox
+  Checkbox,
+  Grid
 } from "semantic-ui-react";
 import Slider from "react-slick";
 
@@ -51,26 +52,20 @@ class Landing extends Component {
         </div>
 
         <Sidebar.Pushable>
-          <Sidebar
-            as={Menu}
-            animation="push"
-            icon="labeled"
-            inverted
-            vertical
-            visible
-            width={"wide"}
-          >
-            <Menu.Item>Comprar por</Menu.Item>
-            <Menu.Item as="a">
+          <Sidebar as={Menu} animation="push" vertical visible width={"wide"}>
+            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
+              Comprar por
+            </Menu.Item>
+            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
               <Checkbox label="Tag 1" />
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
               <Checkbox label="Tag 2" />
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
               <Checkbox label="Tag 3" />
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
               <Checkbox label="Tag 4" />
             </Menu.Item>
           </Sidebar>
@@ -142,6 +137,43 @@ class Landing extends Component {
             </Container>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+        <Grid inverted padded>
+          <Grid.Row color="black">
+            <Grid.Column width={3}>
+              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <Grid columns="three" divided>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                  </Grid.Column>
+                </Grid.Row>
+
+                <Grid.Row>
+                  <Grid.Column>
+                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
