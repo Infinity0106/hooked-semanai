@@ -23,7 +23,7 @@ class Login extends Component {
     return (
       <div style={{ height: "100%" }}>
         <Error open={this.props.data.error}>
-          <p>Error en login, usuario o contraseña vacía</p>
+          <p>{this.props.data.error_msg}</p>
         </Error>
         <Grid
           style={{ height: "100%" }}
@@ -56,6 +56,7 @@ class Login extends Component {
             placeholder="Email"
             type="email"
             autoFocus
+            value={this.props.data.email}
             onChange={e => Ctrl.setValue.bind(this, e, "email")()}
           >
             <Icon name="at" />
@@ -67,6 +68,7 @@ class Login extends Component {
             placeholder="Password"
             type="password"
             style={{ marginBottom: 10 }}
+            value={this.props.data.password}
             onChange={e => Ctrl.setValue.bind(this, e, "password")()}
           >
             <Icon name="lock" />
@@ -76,7 +78,7 @@ class Login extends Component {
             Login
           </Button>
           <Divider horizontal>OR</Divider>
-          <Button positive fluid onClick={Ctrl.signup.bind(this)}>
+          <Button positive fluid onClick={Ctrl.changeView.bind(this)}>
             Signup
           </Button>
         </div>
@@ -91,6 +93,8 @@ class Login extends Component {
             placeholder="Full name"
             type="text"
             autoFocus
+            value={this.props.data.nombre}
+            onChange={e => Ctrl.setValue.bind(this, e, "nombre")()}
           >
             <Icon name="user" />
             <input />
@@ -101,6 +105,7 @@ class Login extends Component {
             iconPosition="left"
             placeholder="Email"
             type="email"
+            value={this.props.data.email}
             onChange={e => Ctrl.setValue.bind(this, e, "email")()}
           >
             <Icon name="at" />
@@ -112,16 +117,17 @@ class Login extends Component {
             placeholder="Password"
             type="password"
             style={{ marginBottom: 10 }}
+            value={this.props.data.password}
             onChange={e => Ctrl.setValue.bind(this, e, "password")()}
           >
             <Icon name="lock" />
             <input />
           </Input>
-          <Button secondary fluid onClick={Ctrl.login.bind(this)}>
+          <Button secondary fluid onClick={Ctrl.signup.bind(this)}>
             Signup
           </Button>
           <Divider horizontal>OR</Divider>
-          <Button positive fluid onClick={Ctrl.signup.bind(this)}>
+          <Button positive fluid onClick={Ctrl.changeView.bind(this)}>
             Login
           </Button>
         </div>
