@@ -97,6 +97,9 @@ carbonldp.extendObjectSchema("Producto", {
     "nombre": {
         "@type": "string"
     },
+    "modelo": {
+        "@type": "string"
+    },
     "precio": {
         "@type": "double"
     },
