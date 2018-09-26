@@ -53,20 +53,20 @@ class Landing extends Component {
 
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation="push" vertical visible width={"wide"}>
-            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
+            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
               Comprar por
             </Menu.Item>
-            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
-              <Checkbox label="Tag 1" />
+            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
+              <Checkbox label="Tecnologia" />
             </Menu.Item>
-            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
-              <Checkbox label="Tag 2" />
+            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
+              <Checkbox label="Musica" />
             </Menu.Item>
-            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
-              <Checkbox label="Tag 3" />
+            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
+              <Checkbox label="Deportes" />
             </Menu.Item>
-            <Menu.Item style={{ textAlign: "right", paddingRight: 50 }}>
-              <Checkbox label="Tag 4" />
+            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
+              <Checkbox label="Ropa" />
             </Menu.Item>
           </Sidebar>
           <Sidebar.Pusher
@@ -98,38 +98,38 @@ class Landing extends Component {
                   </Card.Content>
                 </Card>
                 <Card>
-                  <Image src="https://react.semantic-ui.com/images/avatar/large/matthew.png" />
+                  <Image src="https://playjoor.com/assets/avatar/jenny.jpg" />
                   <Card.Content>
-                    <Card.Header>Matthew</Card.Header>
+                    <Card.Header>Maria</Card.Header>
                     <Card.Meta>
-                      <span className="date">Joined in 2015</span>
+                      <span className="date">Joined in 2012</span>
                     </Card.Meta>
                     <Card.Description>
-                      Matthew is a musician living in Nashville.
+                      Thomas is a software engineer living in Florida.
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
                     <a>
                       <Icon name="user" />
-                      22 Friends
+                      40 Friends
                     </a>
                   </Card.Content>
                 </Card>
                 <Card>
-                  <Image src="https://react.semantic-ui.com/images/avatar/large/matthew.png" />
+                  <Image src="https://playjoor.com/assets/avatar/elliot.jpg" />
                   <Card.Content>
-                    <Card.Header>Matthew</Card.Header>
+                    <Card.Header>Esteban</Card.Header>
                     <Card.Meta>
-                      <span className="date">Joined in 2015</span>
+                      <span className="date">Joined in 2016</span>
                     </Card.Meta>
                     <Card.Description>
-                      Matthew is a musician living in Nashville.
+                      Esteban is an art major from Wisconsin.
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
                     <a>
                       <Icon name="user" />
-                      22 Friends
+                      2 Friends
                     </a>
                   </Card.Content>
                 </Card>
