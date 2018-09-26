@@ -33,7 +33,9 @@ class Login extends Component {
             <Image src="/logo.svg" size="tiny" centered />
             <Header as="h2" style={{ marginTop: 0 }}>
               Hooked
-              <Header.Subheader>Mejores sugerencias</Header.Subheader>
+              <Header.Subheader>
+                Mejores sugerencias, mejores compras
+              </Header.Subheader>
             </Header>
             <Segment raised>
               <Input
@@ -42,6 +44,7 @@ class Login extends Component {
                 iconPosition="left"
                 placeholder="Email"
                 type="email"
+                autoFocus
                 onChange={e => Ctrl.setValue.bind(this, e, "email")()}
               >
                 <Icon name="at" />
