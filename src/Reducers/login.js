@@ -3,7 +3,8 @@ export default (
     email: "",
     password: "",
     error: false,
-    token: null
+    token: null,
+    signed: false
   },
   action
 ) => {
