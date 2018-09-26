@@ -1,10 +1,6 @@
 import { CarbonLDP } from "carbonldp";
 import { AccessPoint } from "carbonldp/AccessPoint";
 
-import "./styles.css";
-
-console.log(CarbonLDP.version);
-
 const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
 carbonldp.extendObjectSchema("Persona", {
   nombre: {
@@ -32,6 +28,7 @@ carbonldp.extendObjectSchema("Persona", {
     "@container": "@set"
   }
 });
+
 carbonldp.extendObjectSchema("Hobby", {
   nombre: {
     "@type": "string"
@@ -49,6 +46,7 @@ carbonldp.extendObjectSchema("Hobby", {
     "@container": "@set"
   }
 });
+
 carbonldp.extendObjectSchema("Tag", {
   nombre: {
     "@type": "string"
@@ -58,6 +56,7 @@ carbonldp.extendObjectSchema("Tag", {
     "@container": "@set"
   }
 });
+
 carbonldp.extendObjectSchema("Empresa", {
   nombre: {
     "@type": "string"
@@ -73,6 +72,7 @@ carbonldp.extendObjectSchema("Empresa", {
     "@container": "@set"
   }
 });
+
 carbonldp.extendObjectSchema("Evento", {
   nombre: {
     "@type": "string"
@@ -92,6 +92,7 @@ carbonldp.extendObjectSchema("Evento", {
     "@type": "string"
   }
 });
+
 carbonldp.extendObjectSchema("Producto", {
   nombre: {
     "@type": "string"
