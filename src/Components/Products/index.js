@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container } from "semantic-ui-react";
+import { Container, Grid, Card, Icon, Image, Header } from "semantic-ui-react";
+import * as Ctrl from "./ctrl";
+import Product from "./product";
 
 class Products extends Component {
   constructor(props) {
@@ -11,7 +13,16 @@ class Products extends Component {
   render() {
     return (
       <Container>
-        <p>produc</p>
+        {this.props.logged_in && <Header>Productos recomendados</Header>}
+        <Header as="h1">Productos</Header>
+        <Grid padded centered columns={3}>
+          <Product />
+          <Product />
+          <Product />
+          <Product />
+          <Product />
+          <Product />
+        </Grid>
       </Container>
     );
   }
@@ -22,6 +33,6 @@ class Products extends Component {
 export default connect(store => {
   return {
     // data: store.nameElementStore
-    data: null
+    logged_in: store.login.token != null
   };
 })(Products);
