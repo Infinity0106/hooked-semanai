@@ -5,7 +5,7 @@ import "./styles.css";
 
 console.log(CarbonLDP.version);
 
-const carbonldp = new CarbonLDP("https://db.itesm-02.carbonldp.com/");
+const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
 carbonldp.extendObjectSchema("Persona", {
     "nombre": {
         "@type": "string"
@@ -41,8 +41,8 @@ carbonldp.extendObjectSchema("Hobby", {
         "@type": "@id",
         "@container": "@set"
     },
-    "materiales": {
-        "@type": "string",
+    "productos": {
+        "@type": "@id",
         "@container": "@set"
     },
     "tags": {
@@ -50,8 +50,8 @@ carbonldp.extendObjectSchema("Hobby", {
         "@container": "@set"
     }
 });
-carbonldp.extendObjectSchema("Tags", {
-    "name": {
+carbonldp.extendObjectSchema("Tag", {
+    "nombre": {
         "@type": "string"
     },
     "subTags": {
@@ -60,17 +60,47 @@ carbonldp.extendObjectSchema("Tags", {
     }
 });
 carbonldp.extendObjectSchema("Empresa",{
-    "name": {
+    "nombre": {
         "@type": "string"
     },
     "location": {
         "@type": "string"
     }, 
-    "dateCreated": {
+    "fechaCreacion": {
         "@type": "date"
     },
-    "employees": {
+    "empleados": {
         "@type": "@id",
         "@container": "@set"
     }
 });
+carbonldp.extendObjectSchema("Evento", {
+    "nombre": {
+        "@type": "string"
+    },
+    "fecha": {
+        "@type": "date"
+    },
+    "productos": {
+        "@type": "@id",
+        "@container": "@set",
+    },
+    "administradores": {
+        "@type": "@id",
+        "@coontainer": "@set"
+    },
+    "ubicacion": {
+        "@type": "string"
+    }
+});
+carbonldp.extendObjectSchema("Producto", {
+    "nombre": {
+        "@type": "string"
+    },
+    "precio": {
+        "@type": "double"
+    },
+    "marca": {
+        "@type": "string"
+    }
+})
