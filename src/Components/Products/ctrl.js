@@ -1,32 +1,41 @@
 import * as Backend from "./../../backend";
 
 export function addToWishList() {
-  this.props.dispatch(dispatch => {
-    dispatch({
-      type: "ADD_PRODUCT_TO_WISHLIST",
-      value: "1"
+  if (this.props.logged_in) {
+    this.props.dispatch(dispatch => {
+      dispatch({
+        type: this.state.wishlisted
+          ? "ADD_PRODUCT_TO_WISHLIST"
+          : "REMOVE_PRODUCT_TO_WISHLIST",
+        value: this.props.id
+      });
     });
-    dispatch({
-      type: "SET_PRODUCT_WISHLISTED",
-      value: !this.props.product.wishlisted
-    });
-  });
+    this.setState({ wishlisted: !this.state.wishlisted });
+  } else {
+    window.location.reload();
+    this.props.history.push("/login");
+  }
 }
 
 export function addToCart() {
-  this.props.dispatch(dispatch => {
-    dispatch({
-      type: "ADD_PRODUCT_TO_CART",
-      value: this.props.product
+  if (this.props.logged_in) {
+    this.props.dispatch(dispatch => {
+      dispatch({
+        type: "ADD_PRODUCT_TO_CART",
+        value: this.props.product
+      });
     });
-  });
+  } else {
+    window.location.reload();
+    this.props.history.push("/login");
+  }
 }
 
 export function getInitialInfo() {
   this.props.dispatch(dispatch => {
     dispatch({
       type: "GET_PRODUCTS_INITIAL",
-      payload: Backend.getAllProducts(this.props.data)
+      payload: Backend.getAllProducts(this.props.data.page)
     });
     dispatch({
       type: "GET_PRODUCTS_PAGES_INITIAL",
@@ -36,9 +45,6 @@ export function getInitialInfo() {
 }
 
 export function pageChange(e, data) {
-  console.log("🛠🛠🛠🛠🛠");
-  console.log(data);
-  console.log("🛠🛠🛠🛠🛠");
   this.props.dispatch(dispatch => {
     dispatch({
       type: "SET_PRODUCTS_VALUE",
@@ -46,7 +52,7 @@ export function pageChange(e, data) {
     });
     dispatch({
       type: "GET_PRODUCTS_INITIAL",
-      payload: Backend.getAllProducts(this.props.data)
+      payload: Backend.getAllProducts(data.activePage)
     });
   });
 }

@@ -27,7 +27,7 @@ class BasicInfo extends Component {
 
           <Form.Group widths="equal">
             <Form.Field>
-              <label>Madre</label>
+              <label>Padres</label>
               <Dropdown
                 placeholder="Busca a tu madre"
                 fluid
@@ -40,7 +40,6 @@ class BasicInfo extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <label>Padre</label>
               <Dropdown
                 placeholder="Busca a tu padre"
                 fluid
