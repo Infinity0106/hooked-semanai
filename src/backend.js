@@ -1,7 +1,74 @@
 import { CarbonLDP } from "carbonldp";
-import { AccessPoint } from "carbonldp/AccessPoint";
+import faker from "faker";
+import productos from "./productos";
 
 const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
+//seeds
+// console.log("🛠🛠🛠🛠🛠");
+// console.log("faker");
+// console.log(faker);
+// console.log("🛠🛠🛠🛠🛠");
+// for (let index = 0; index < 10; index++) {
+//   carbonldp.documents.$createAndRetrieve("persona/", {
+//     types: ["Persona"],
+//     nombre: faker.internet.userName(),
+//     birthDate: faker.date.past(),
+//     // padres: {
+//     //   "@type": "@id",
+//     //   "@container": "@set"
+//     // },
+//     // hijos: {
+//     //   "@type": "@id",
+//     //   "@container": "@set"
+//     // },
+//     // empresa: {
+//     //   "@type": "@id"
+//     // },
+//     // profesion: {
+//     //   "@type": "string"
+//     // },
+//     // hobby: {
+//     //   "@type": "@id",
+//     //   "@container": "@set"
+//     // },
+//     email: faker.internet.email(),
+//     password: faker.internet.password()
+//   });
+// }
+// for (let index = 0; index < 10; index++) {
+//   carbonldp.documents.$createAndRetrieve("hobby/", {
+//     types: ["Hobby"],
+//     nombre: faker.internet.userName()
+//   });
+// }
+// for (let index = 0; index < 10; index++) {
+//   carbonldp.documents.$createAndRetrieve("empresa/", {
+//     types: ["Empresa"],
+//     nombre: faker.internet.userName(),
+//     location: `${faker.address.streetAddress()}, ${faker.address.state()}, ${faker.address.country()}`,
+//     fechaCreacion: faker.date.past()
+//   });
+// }
+// console.log("🛠🛠🛠🛠🛠");
+// console.log(productos);
+// console.log("🛠🛠🛠🛠🛠");
+// productos.forEach(ele => {
+//   carbonldp.documents.$create("productos/", {
+//     type: ["Producto"],
+//     nombre: ele.nombre,
+//     modelo: ele.modelo,
+//     precio: ele.precio,
+//     marca: ele.marca,
+//     imagen: ele.imagen
+//   });
+// });
+carbonldp.documents.$getChildren("productos/").then(productos => {
+  productos.forEach(ele => {
+    ele.$addType("Producto");
+    ele.$save();
+  });
+});
+
 carbonldp.extendObjectSchema("Persona", {
   nombre: {
     "@type": "string"
@@ -26,6 +93,12 @@ carbonldp.extendObjectSchema("Persona", {
   hobby: {
     "@type": "@id",
     "@container": "@set"
+  },
+  email: {
+    "@type": "string"
+  },
+  password: {
+    "@type": "string"
   }
 });
 
@@ -38,6 +111,10 @@ carbonldp.extendObjectSchema("Hobby", {
     "@container": "@set"
   },
   productos: {
+    "@type": "@id",
+    "@container": "@set"
+  },
+  personas: {
     "@type": "@id",
     "@container": "@set"
   },
@@ -106,7 +183,7 @@ carbonldp.extendObjectSchema("Producto", {
   marca: {
     "@type": "string"
   },
-  modelo: {
+  imagen: {
     "@type": "string"
   }
 });
@@ -150,4 +227,56 @@ export function login({ email, password }) {
       if (!doc) return Promise.reject("Usuario no encontrado");
       return doc[0];
     });
+}
+
+export function addHobby({}) {
+  // return carbonldp.documents.$createAndRetrieve("hobby/", {
+  //   types: ["Hobby"],
+  //   fecha,
+  //   nombre
+  // });
+}
+export function addEvent({}) {
+  // return carbonldp.documents.$createAndRetrieve("evento/", {
+  //   types: ["Evento"],
+  //   fecha,
+  //   nombre,
+  //   productos,
+  //   administradores,
+  //   ubicacion
+  // });
+}
+
+export function getAllCompanies() {
+  return carbonldp.documents.$getChildren("empresa/");
+}
+
+export function getAllPersonas() {
+  return carbonldp.documents.$getChildren("persona/");
+}
+
+export function getAllProducts({ page }) {
+  return carbonldp.documents.$getChildren("productos/", builder => {
+    return builder
+      .withType("Producto")
+      .properties({
+        nombre: builder.inherit,
+        modelo: builder.inherit,
+        precio: builder.inherit,
+        marca: builder.inherit,
+        imagen: builder.inherit
+      })
+      .limit(9)
+      .offset((page - 1) * 9);
+  });
+}
+
+export function getAllProductPages() {
+  return carbonldp.documents
+    .$getChildren("productos/")
+    .then(productos => Promise.resolve(Math.ceil(productos.length / 9)));
+}
+
+export function getAllEventos() {
+  return carbonldp.documents.$getChildren("eventos/");
 }
