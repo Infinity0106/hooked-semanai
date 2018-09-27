@@ -14,9 +14,6 @@ class Products extends Component {
     Ctrl.getInitialInfo.bind(this)();
   }
   render() {
-    console.log("🛠🛠🛠🛠🛠");
-    console.log(this.props.data.products);
-    console.log("🛠🛠🛠🛠🛠");
     return (
       <Container>
         {this.props.logged_in && (

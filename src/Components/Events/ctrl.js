@@ -30,7 +30,7 @@ export function getInitialInfo() {
     });
     dispatch({
       type: "GET_EVENTS_PAGES_INITIAL",
-      payload: Backend.getAllEventPages()
+      payload: Backend.getAllEventoPages()
     });
   });
 }
