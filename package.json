@@ -5,6 +5,8 @@
   "dependencies": {
     "carbonldp": "^5.0.0",
     "faker": "^4.1.0",
+    "fast-csv": "^2.4.1",
+    "json-loader": "^0.5.7",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
