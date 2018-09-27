@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Segment, Header, Button, Dropdown, Form } from "semantic-ui-react";
+import {
+  Segment,
+  Header,
+  Button,
+  Dropdown,
+  Form,
+  Divider
+} from "semantic-ui-react";
 
 class WorkInfo extends Component {
   constructor(props) {
@@ -13,55 +20,13 @@ class WorkInfo extends Component {
       <Segment raised>
         <Header>Informacion laboral</Header>
         <Form>
-          <Form.Group widths="equal">
-            <Form.Field>
-              <label>Nombre completo</label>
-              <input placeholder="Nombre completo" />
-            </Form.Field>
-            <Form.Field>
-              <label>Fecha nacimiento</label>
-              <input placeholder="Nombre completo" type="date" />
-            </Form.Field>
-          </Form.Group>
-
-          <Form.Group widths="equal">
-            <Form.Field>
-              <label>Madre</label>
-              <Dropdown
-                placeholder="Busca a tu madre"
-                fluid
-                search
-                selection
-                options={[
-                  { key: "1", value: "1", text: "1" },
-                  { key: "2", value: "2", text: "2" },
-                  { key: "3", value: "3", text: "3" }
-                ]}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Padre</label>
-              <Dropdown
-                placeholder="Busca a tu padre"
-                fluid
-                search
-                selection
-                options={[
-                  { key: "1", value: "1", text: "1" },
-                  { key: "2", value: "2", text: "2" },
-                  { key: "3", value: "3", text: "3" }
-                ]}
-              />
-            </Form.Field>
-          </Form.Group>
           <Form.Field>
-            <label>Pasa tiempos</label>
+            <label>Empresa</label>
             <Dropdown
-              placeholder="Busca tu hobby favorito"
+              placeholder="Busca a tu empresa"
               fluid
               search
               selection
-              multiple
               options={[
                 { key: "1", value: "1", text: "1" },
                 { key: "2", value: "2", text: "2" },
@@ -70,7 +35,27 @@ class WorkInfo extends Component {
             />
           </Form.Field>
           <Button positive type="submit">
-            Guardar
+            Guardar cambios
+          </Button>
+        </Form>
+        <Divider horizontal>OR</Divider>
+        <Form>
+          <Form.Group widths="equal">
+            <Form.Field>
+              <label>Nombre</label>
+              <input placeholder="Nombre" type="text" />
+            </Form.Field>
+            <Form.Field>
+              <label>Fecha creacion</label>
+              <input placeholder="Fecha de creacion" type="date" />
+            </Form.Field>
+          </Form.Group>
+          <Form.Field>
+            <label>Ubicacion</label>
+            <input placeholder="Calle, Num, Estado, Ciudad" type="text" />
+          </Form.Field>
+          <Button positive type="submit">
+            Crear empresa
           </Button>
         </Form>
       </Segment>

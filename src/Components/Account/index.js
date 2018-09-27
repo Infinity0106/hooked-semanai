@@ -14,7 +14,9 @@ class Account extends Component {
     super(props);
     this.state = {};
   }
-  componentWillMount() {}
+  componentWillMount() {
+    Ctrl.getInitialInfo.bind(this)();
+  }
   render() {
     return (
       <Container>
@@ -27,25 +29,25 @@ class Account extends Component {
                   name="Informacion basica"
                   active={this.props.data.active === "basic"}
                   data_value="basic"
-                  onClick={Ctrl.setValue.bind(this)}
+                  onClick={Ctrl.setActiveValue.bind(this)}
                 />
                 <Menu.Item
                   name="Informacion trabajo"
                   active={this.props.data.active === "work"}
                   data_value="work"
-                  onClick={Ctrl.setValue.bind(this)}
+                  onClick={Ctrl.setActiveValue.bind(this)}
                 />
                 <Menu.Item
                   name="Mis eventos"
                   active={this.props.data.active === "events"}
                   data_value="events"
-                  onClick={Ctrl.setValue.bind(this)}
+                  onClick={Ctrl.setActiveValue.bind(this)}
                 />
                 <Menu.Item
                   name="Mis productos"
                   active={this.props.data.active === "products"}
                   data_value="products"
-                  onClick={Ctrl.setValue.bind(this)}
+                  onClick={Ctrl.setActiveValue.bind(this)}
                 />
               </Menu>
             </Grid.Column>
