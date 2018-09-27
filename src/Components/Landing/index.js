@@ -11,13 +11,17 @@ import {
   Grid
 } from "semantic-ui-react";
 import Slider from "react-slick";
+import * as Ctrl from "./ctrl";
+import Product from "../Products/product";
 
 class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  componentWillMount() {}
+  componentWillMount() {
+    Ctrl.getInitialValues.bind(this)();
+  }
   render() {
     return (
       <div>
@@ -56,18 +60,14 @@ class Landing extends Component {
             <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
               Comprar por
             </Menu.Item>
-            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
-              <Checkbox label="Tecnologia" />
-            </Menu.Item>
-            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
-              <Checkbox label="Musica" />
-            </Menu.Item>
-            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
-              <Checkbox label="Deportes" />
-            </Menu.Item>
-            <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
-              <Checkbox label="Ropa" />
-            </Menu.Item>
+            {this.props.tags.map(ele => (
+              <Menu.Item style={{ textAlign: "left", paddingRight: 50 }}>
+                <Checkbox
+                  label={ele.name}
+                  onClick={Ctrl.changeProducts.bind(this, ele.name)}
+                />
+              </Menu.Item>
+            ))}
           </Sidebar>
           <Sidebar.Pusher
             as="div"
@@ -78,62 +78,19 @@ class Landing extends Component {
             }}
           >
             <Container>
-              <Card.Group itemsPerRow={6}>
-                <Card>
-                  <Image src="https://react.semantic-ui.com/images/avatar/large/matthew.png" />
-                  <Card.Content>
-                    <Card.Header>Matthew</Card.Header>
-                    <Card.Meta>
-                      <span className="date">Joined in 2015</span>
-                    </Card.Meta>
-                    <Card.Description>
-                      Matthew is a musician living in Nashville.
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content extra>
-                    <a>
-                      <Icon name="user" />
-                      22 Friends
-                    </a>
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Image src="https://playjoor.com/assets/avatar/jenny.jpg" />
-                  <Card.Content>
-                    <Card.Header>Maria</Card.Header>
-                    <Card.Meta>
-                      <span className="date">Joined in 2012</span>
-                    </Card.Meta>
-                    <Card.Description>
-                      Thomas is a software engineer living in Florida.
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content extra>
-                    <a>
-                      <Icon name="user" />
-                      40 Friends
-                    </a>
-                  </Card.Content>
-                </Card>
-                <Card>
-                  <Image src="https://playjoor.com/assets/avatar/elliot.jpg" />
-                  <Card.Content>
-                    <Card.Header>Esteban</Card.Header>
-                    <Card.Meta>
-                      <span className="date">Joined in 2016</span>
-                    </Card.Meta>
-                    <Card.Description>
-                      Esteban is an art major from Wisconsin.
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content extra>
-                    <a>
-                      <Icon name="user" />
-                      2 Friends
-                    </a>
-                  </Card.Content>
-                </Card>
-              </Card.Group>
+              <Grid padded centered columns={3}>
+                {this.props.products.map(item => (
+                  <Product
+                    key={item.$id}
+                    id={item.$id}
+                    name={item.nombre}
+                    tags={item.marca}
+                    desc={item.modelo}
+                    image={item.imagen}
+                    price={item.precio}
+                  />
+                ))}
+              </Grid>
             </Container>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -184,6 +141,7 @@ class Landing extends Component {
 export default connect(store => {
   return {
     // data: store.nameElementStore
-    data: null
+    tags: store.landing.tags,
+    products: store.landing.products
   };
 })(Landing);

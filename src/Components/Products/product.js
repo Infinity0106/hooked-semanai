@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Grid, Image, Card, Icon } from "semantic-ui-react";
+import { Grid, Image, Card, Icon, Label } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 import * as Ctrl from "./ctrl";
 
 class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { wishlisted: false };
   }
   componentWillMount() {}
   render() {
@@ -19,13 +20,22 @@ class Product extends Component {
               as: "a",
               corner: "left",
               icon: "heart",
-              color: !this.props.logged_in ? null : "red",
+              color: !this.props.logged_in
+                ? null
+                : this.state.wishlisted
+                  ? "red"
+                  : null,
               size: "big",
               onClick: Ctrl.addToWishList.bind(this)
             }}
           />
           <Card.Content>
-            <Card.Header>{this.props.name}</Card.Header>
+            <Card.Header>
+              <Label color="green" ribbon="right">
+                $ {parseFloat(this.props.price).toFixed(2)}
+              </Label>
+              <p>{this.props.name}</p>
+            </Card.Header>
             <Card.Meta>
               <span className="date">{this.props.tags}</span>
             </Card.Meta>
@@ -47,9 +57,11 @@ class Product extends Component {
   componentDidMount() {}
   componentWillUnmount() {}
 }
-export default connect(store => {
-  return {
-    // data: store.nameElementStore
-    logged_in: store.login.token != null
-  };
-})(Product);
+export default withRouter(
+  connect(store => {
+    return {
+      // data: store.nameElementStore
+      logged_in: store.login.token != null
+    };
+  })(Product)
+);

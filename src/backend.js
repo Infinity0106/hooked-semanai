@@ -1,6 +1,8 @@
 import { CarbonLDP } from "carbonldp";
 import faker from "faker";
 import productos from "./productos";
+import { AccessPoint } from "carbonldp/AccessPoint/AccessPoint";
+import { Header } from "carbonldp/HTTP/Header";
 
 const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
 //seeds
@@ -49,17 +51,86 @@ const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
 //     fechaCreacion: faker.date.past()
 //   });
 // }
-// console.log("🛠🛠🛠🛠🛠");
-// console.log(productos);
-// console.log("🛠🛠🛠🛠🛠");
-// productos.forEach(ele => {
-//   carbonldp.documents.$create("productos/", {
-//     type: ["Producto"],
-//     nombre: ele.nombre,
-//     modelo: ele.modelo,
-//     precio: ele.precio,
-//     marca: ele.marca,
-//     imagen: ele.imagen
+// productos.forEach((ele, index) => {
+//   if (index < 500) {
+//     carbonldp.documents.$create("productos/", {
+//       types: ["Producto"],
+//       nombre: ele.nombre,
+//       modelo: ele.modelo,
+//       precio: ele.precio,
+//       marca: ele.marca,
+//       imagen: ele.imagen
+//     });
+//   }
+// });
+// carbonldp.documents.$getChildren("productos/").then(elements => {
+//   elements.forEach(ele => {
+//     ele.$delete();
+//   });
+// });
+// productos
+//   .forEach((ele, index) => {
+//     if (index < 500) {
+//       carbonldp.documents.$create(
+//         `tags/`,
+//         {
+//           types: ["Tag"],
+//           nombre: ele.category
+//         },
+//         ele.category
+//       );
+//     }
+//   })
+// let tags = ["outdoors", "sports", "cloths", "drink", "party", "family"];
+// tags.forEach(ele => {
+//   console.log("🛠🛠🛠🛠🛠");
+//   console.log(ele);
+//   console.log("🛠🛠🛠🛠🛠");
+//   carbonldp.documents.$create(
+//     `tags/`,
+//     {
+//       types: ["Tag"],
+//       nombre: ele
+//     },
+//     ele
+//   );
+// });
+// carbonldp.documents.$getChildren("tags/").then(elements => {
+//   elements.forEach(ele => {
+//     ele.$delete();
+//   });
+// });
+let eventos = [
+  {
+    nombre: faker.internet.userName(),
+    fecha: faker.date.future(),
+    ubicacion: `${faker.address.streetAddress()}, ${faker.address.state()}, ${faker.address.country()}`
+  }
+];
+for (let index = 0; index < 10; index++) {
+  carbonldp.documents.$createAndRetrieve("eventos/", {
+    types: ["Evento"],
+    nombre: faker.internet.userName(),
+    fecha: faker.date.future(),
+    ubicacion: `${faker.address.streetAddress()}, ${faker.address.state()}, ${faker.address.country()}`
+  });
+}
+
+// carbonldp.documents.$getChildren("productos/").then(elements => {
+//   carbonldp.documents.$getChildren("tags/").then(tags => {
+//     elements.forEach((ele, index) => {
+//       ele
+//         .$addMembers("tags/", [
+//           tags[index % tags.length],
+//           tags[(index + 3) % tags.length],
+//           tags[(index + 4) % tags.length]
+//         ])
+//         .then(() => {
+//           console.log("🛠🛠🛠🛠🛠");
+//           console.log("added");
+//           console.log("🛠🛠🛠🛠🛠");
+//         });
+//     });
 //   });
 // });
 
@@ -172,7 +243,7 @@ carbonldp.extendObjectSchema("Producto", {
     "@type": "string"
   },
   precio: {
-    "@type": "double"
+    "@type": "string"
   },
   marca: {
     "@type": "string"
@@ -249,7 +320,7 @@ export function getAllPersonas() {
   return carbonldp.documents.$getChildren("persona/");
 }
 
-export function getAllProducts({ page }) {
+export function getAllProducts(page) {
   return carbonldp.documents.$getChildren("productos/", builder => {
     return builder
       .withType("Producto")
@@ -287,8 +358,87 @@ export function getAllProductPages() {
     .then(productos => Promise.resolve(Math.ceil(productos.length / 9)));
 }
 
-export function getAllEventPages() {
+export function getAllEventos(page) {
+  return carbonldp.documents.$getChildren("eventos/", builder => {
+    return builder
+      .withType("Producto")
+      .properties({
+        nombre: builder.inherit,
+        modelo: builder.inherit,
+        precio: builder.inherit,
+        marca: builder.inherit,
+        imagen: builder.inherit
+      })
+      .limit(9)
+      .offset((page - 1) * 9);
+  });
+}
+
+export function getAllEventoPages() {
   return carbonldp.documents
     .$getChildren("eventos/")
-    .then(eventos => Promise.resolve(Math.ceil(eventos.length / 6)));
+    .then(evento => Promise.resolve(Math.ceil(evento.length / 9)));
+}
+
+export function getTopTags() {
+  return carbonldp.documents.$executeSELECTQuery(
+    `
+    PREFIX local: <https://db.itesm-03.carbonldp.com/vocabularies/main/#>
+
+    SELECT ?tagName (COUNT(?tagProducts) as ?countedProducts)
+   
+   WHERE {
+     ?tag a local:Tag.
+     ?tag local:nombre ?tagName.
+     FILTER(?tagName != "").
+     
+     ?tag local:productos ?tagProducts.
+   }
+   
+   GROUP BY ?tagName
+   ORDER BY DESC(?countedProducts)
+   LIMIT 5
+  `
+  );
+}
+
+export function getLandingProducts(tag_name) {
+  return carbonldp.documents.$getChildren("productos/", builder => {
+    if (tag_name) {
+      return builder
+        .withType("Producto")
+        .properties({
+          nombre: builder.inherit,
+          modelo: builder.inherit,
+          precio: builder.inherit,
+          marca: builder.inherit,
+          imagen: builder.inherit,
+          tags: {
+            query: function(builderTags) {
+              return builderTags.properties({
+                nombre: {
+                  query: function(builderName) {
+                    return builderName.values(builderName.value(tag_name));
+                  }
+                }
+              });
+            }
+          }
+        })
+        .filter(`${builder.property("nombre")} != ""`)
+        .limit(6);
+    } else {
+      return builder
+        .withType("Producto")
+        .properties({
+          nombre: builder.inherit,
+          modelo: builder.inherit,
+          precio: builder.inherit,
+          marca: builder.inherit,
+          imagen: builder.inherit,
+          tags: builder.inherit
+        })
+        .limit(6);
+    }
+  });
 }
