@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Header, Grid, Image } from "semantic-ui-react";
+import Event from "./event";
 
 class Events extends Component {
   constructor(props) {
@@ -15,13 +16,71 @@ class Events extends Component {
     return (
       <Container>
         <Header as="h1">Eventos</Header>
-        <Grid columns={2} divided>
+        <Grid padded centered columns={2}>
           <Grid.Row>
             <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+              <Event
+                name={"Palacio de Hierro Fashion Show"}
+                tags={"Ropa"}
+                desc={"5 de Octubre 2018"}
+                image={
+                  "/images/fashionShow.jpg"
+                }
+              />
             </Grid.Column>
             <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+              <Event
+                name={"Concierto de The Killers"}
+                tags={"Musica"}
+                desc={"4 Noviembre 2018"}
+                image={
+                  "/images/TheKillers.jpg"
+                }
+              />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Event
+                name={"Pal Norte Music Festival"}
+                tags={"Musica"}
+                desc={"20-21 de Abril 2019"}
+                image={
+                  "/images/musicFestival.jpg"
+                }
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Event
+                name={"TedX Tim Berners Lee TechTalk"}
+                tags={"Tecnologia"}
+                desc={"7 de Diciembre 2018"}
+                image={
+                  "/images/TedX.jpg"
+                }
+              />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <Event
+                name={"Concierto de Calvin Harris"}
+                tags={"Musica"}
+                desc={"15 de Octubre 2018"}
+                image={
+                  "/images/calvinHarris.jpg"
+                }
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Event
+                name={"Carrera 5k/10k Color Run"}
+                tags={"Deportes"}
+                desc={"20 de Octubre 2018"}
+                image={
+                  "/images/colorRun.jpg"
+                }
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>

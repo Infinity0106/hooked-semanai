@@ -1,0 +1,39 @@
+﻿fashionShow
+
+tag: Ropa
+
+Descripción: Fashion show del Palacio de Hierro 5 de Octubre 2018
+
+
+TheKillers
+
+tag: Musica
+
+Descripción: Concierto de la banda The Killers 4 Noviembre 2018
+
+
+musicFestival
+
+tag: Musica
+
+Descripción: PalNorte Festival 20-21 Abril 2019
+
+
+TedX
+
+tag: Tecnologia
+
+Descripción: Platica de tecnología impartida por Tim Berners Lee 7 de Diciembre 2018
+
+
+calvinHarris
+
+tag: Musica
+
+Descripción: Concierto de Calvin Harris 15 de Octubre 2018
+
+colorRun
+
+tag: Deportes
+
+Descripción: Color Run 5K/10K 20 de Octubre 2018

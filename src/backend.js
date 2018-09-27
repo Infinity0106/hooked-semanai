@@ -265,12 +265,30 @@ export function getAllProducts({ page }) {
   });
 }
 
+export function getAllEvents({ page }) {
+  return carbonldp.documents.$getChildren("eventos/", builder => {
+    return builder
+      .withType("Evento")
+      .properties({
+        nombre: builder.inherit,
+        fecha: builder.inherit,
+        productos: builder.inherit,
+        administradores: builder.inherit,
+        ubicacion: builder.inherit,
+      })
+      .limit(6)
+      .offset((page -1) *6);
+  })
+}
+
 export function getAllProductPages() {
   return carbonldp.documents
     .$getChildren("productos/")
     .then(productos => Promise.resolve(Math.ceil(productos.length / 9)));
 }
 
-export function getAllEventos() {
-  return carbonldp.documents.$getChildren("eventos/");
+export function getAllEventPages() {
+  return carbonldp.documents
+    .$getChildren("eventos/")
+    .then(eventos => Promise.resolve(Math.ceil(eventos.length / 6)));
 }
