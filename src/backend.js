@@ -62,12 +62,6 @@ const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
 //     imagen: ele.imagen
 //   });
 // });
-carbonldp.documents.$getChildren("productos/").then(productos => {
-  productos.forEach(ele => {
-    ele.$addType("Producto");
-    ele.$save();
-  });
-});
 
 carbonldp.extendObjectSchema("Persona", {
   nombre: {
