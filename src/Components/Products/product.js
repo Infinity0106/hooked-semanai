@@ -19,7 +19,7 @@ class Product extends Component {
               as: "a",
               corner: "left",
               icon: "heart",
-              color: "red",
+              color: !this.props.logged_in ? null : "red",
               size: "big",
               onClick: Ctrl.addToWishList.bind(this)
             }}

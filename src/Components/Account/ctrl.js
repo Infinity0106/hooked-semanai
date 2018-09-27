@@ -9,9 +9,6 @@ export function setActiveValue(e, { data_value }) {
 }
 
 export function setValue(e, data) {
-  console.log("🛠🛠🛠🛠🛠");
-  console.log(data);
-  console.log("🛠🛠🛠🛠🛠");
   this.props.dispatch({
     type: "SET_ACCOUNT_VALUE",
     key: data.data_key,

@@ -7,7 +7,8 @@ import {
   Dropdown,
   Image,
   Icon,
-  Button
+  Button,
+  Label
 } from "semantic-ui-react";
 import * as Ctrl from "./ctrl";
 import { withRouter } from "react-router-dom";
@@ -58,6 +59,22 @@ class Header extends Component {
                 </Button>
               )}
               {this.props.logged_in && (
+                <Menu.Item as="a">
+                  <Icon name="heart" />
+                  {this.props.has_wishlist && (
+                    <Label color="green" circular floating empty />
+                  )}
+                </Menu.Item>
+              )}
+              {this.props.logged_in && (
+                <Menu.Item as="a">
+                  <Icon name="shop" />
+                  {this.props.has_shopping_bag && (
+                    <Label color="green" circular floating empty />
+                  )}
+                </Menu.Item>
+              )}
+              {this.props.logged_in && (
                 <Dropdown
                   item
                   simple
@@ -70,7 +87,7 @@ class Header extends Component {
                           "https://s3.amazonaws.com/uifaces/faces/twitter/kuldarkalvik/128.jpg"
                         }
                       />{" "}
-                      {"juancho perez"}
+                      {this.props.name}
                     </span>
                   }
                 >
@@ -103,7 +120,10 @@ export default withRouter(
     return {
       // data: store.nameElementStore
       active: store.header.active,
-      logged_in: store.login.token != null
+      logged_in: store.login.token != null,
+      name: store.login.nombre,
+      has_shopping_bag: store.shopping_bag.products.length > 0,
+      has_wishlist: store.wishlist.products.length > 0
     };
   })(Header)
 );

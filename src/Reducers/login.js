@@ -13,7 +13,10 @@ export default (
   let newState = { ...state };
   switch (action.type) {
     case "SET_BACKEND_LOGIN_VALUE_FULFILLED":
-      newState.token = action.payload;
+      newState.nombre = action.payload.nombre;
+      newState.email = action.payload.email;
+      newState.password = "";
+      newState.token = action.payload.password;
       break;
     case "SET_BACKEND_LOGIN_VALUE_REJECTED":
       newState.error = true;

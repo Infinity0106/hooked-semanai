@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Grid, Card, Icon, Image, Header } from "semantic-ui-react";
-import * as Ctrl from "./ctrl";
+import { Container, Grid, Header, Pagination } from "semantic-ui-react";
 import Product from "./product";
+
+import * as Ctrl from "./ctrl";
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  componentWillMount() {}
+  componentWillMount() {
+    Ctrl.getInitialInfo.bind(this)();
+  }
   render() {
     return (
       <Container>
@@ -65,6 +68,25 @@ class Products extends Component {
             }
           />
         </Grid>
+        <Grid centered style={{ marginBottom: 60 }}>
+          <Pagination
+            defaultActivePage={this.props.data.page}
+            firstItem={null}
+            lastItem={null}
+            pointing
+            secondary
+            totalPages={this.props.data.total_pages}
+            onPageChange={Ctrl.pageChange.bind(this)}
+          />
+        </Grid>
+        {this.props.logged_in && (
+          <div>
+            <Header as="h1">Recomendados para ti</Header>
+            <Grid>
+              <Product />
+            </Grid>
+          </div>
+        )}
       </Container>
     );
   }
@@ -75,6 +97,7 @@ class Products extends Component {
 export default connect(store => {
   return {
     // data: store.nameElementStore
+    data: store.products,
     logged_in: store.login.token != null
   };
 })(Products);
