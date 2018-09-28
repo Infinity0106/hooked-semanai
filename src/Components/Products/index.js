@@ -16,21 +16,24 @@ class Products extends Component {
   render() {
     return (
       <Container>
-        {this.props.logged_in ||
-          (this.props.show_recomendation && (
-            <div>
-              <Header as="h1">Recomendados para ti</Header>
-              <Grid>
-                <Product 
-                  name={"Danny & Nicole® Sleeveless Mesh Shantung Polka Dot Fit-and-Flare Dress - Petite"}
-                  tags={"Danny & Nicole"}
-                  desc={"fit and flare"}
-                  image={"http://s7d9.scene7.com/is/image/JCPenney/DP1215201517063080M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp"}
-                  price={"42.29"}
-                />
-              </Grid>
-            </div>
-        ))}
+        {(this.props.logged_in || this.props.show_recomendation) && (
+          <div>
+            <Header as="h1">Recomendados para ti</Header>
+            <Grid>
+              <Product
+                name={
+                  "Danny & Nicole® Sleeveless Mesh Shantung Polka Dot Fit-and-Flare Dress - Petite"
+                }
+                tags={"Danny & Nicole"}
+                desc={"fit and flare"}
+                image={
+                  "http://s7d9.scene7.com/is/image/JCPenney/DP1215201517063080M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp"
+                }
+                price={"42.29"}
+              />
+            </Grid>
+          </div>
+        )}
         <Header as="h1">Productos</Header>
         <Grid padded centered columns={3}>
           {this.props.data.products.map((item, i) => {

@@ -49,20 +49,19 @@ class Events extends Component {
             onPageChange={Ctrl.pageChange.bind(this)}
           />
         </Grid>
-        {this.props.logged_in ||
-          (this.props.show_recomendation && (
-            <div>
-              <Header as="h1">Recomendados para ti</Header>
-              <Grid padded centered columns={2}>
-                <Event
-                  name={null}
-                  tags={"Ropa"}
-                  desc={"3634 Goldner Route, Maryland, Turkmenistan 11/10/2018"}
-                  image={null}
-                />
-              </Grid>
-            </div>
-          ))}
+        {(this.props.logged_in || this.props.show_recomendation) && (
+          <div>
+            <Header as="h1">Recomendados para ti</Header>
+            <Grid padded centered columns={2}>
+              <Event
+                name={null}
+                tags={"Ropa"}
+                desc={"3634 Goldner Route, Maryland, Turkmenistan 11/10/2018"}
+                image={null}
+              />
+            </Grid>
+          </div>
+        )}
       </Container>
     );
   }
