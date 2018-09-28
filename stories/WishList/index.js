@@ -6,6 +6,6 @@ import Index from "./../../src/Components/WishList";
 import ReduxProvider from "./../provider";
 import indexMD from "./index.md";
 
-storiesOf("Shopping bag", module)
+storiesOf("Wishlist", module)
   .addDecorator(story => <ReduxProvider story={story} />)
   .add("Index view", withNotes(indexMD)(() => <Index />));
