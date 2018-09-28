@@ -3,7 +3,9 @@ import * as Backend from "./../../backend";
 export function logOut() {
   let self = this;
   this.props.dispatch(dispatch => {
-    self.props.history.go(-(this.props.history.length - 1));
+    self.props.history.go(-this.props.history.length);
+    self.props.history.replace("/");
+    window.location.reload();
     dispatch({
       type: "SET_LOGIN_VALUE",
       key: "token",
