@@ -44,27 +44,28 @@ class Events extends Component {
             onPageChange={Ctrl.pageChange.bind(this)}
           />
         </Grid>
-        {this.props.logged_in && (
-          <div>
-            <Header as="h1">Recomendados para ti</Header>
-            <Grid columns={2} divided>
-              <Grid.Column>
-                <Grid as="a">
-                  <Grid.Column width={5}>
-                    <Image
-                      src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png"
-                      avatar
-                    />
-                  </Grid.Column>
-                  <Grid.Column width={11}>
-                    <Header as="h4">titulo</Header>
-                    <p>descripcion</p>
-                  </Grid.Column>
-                </Grid>
-              </Grid.Column>
-            </Grid>
-          </div>
-        )}
+        {this.props.logged_in ||
+          (this.props.show_recomendation && (
+            <div>
+              <Header as="h1">Recomendados para ti</Header>
+              <Grid columns={2} divided>
+                <Grid.Column>
+                  <Grid as="a">
+                    <Grid.Column width={5}>
+                      <Image
+                        src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png"
+                        avatar
+                      />
+                    </Grid.Column>
+                    <Grid.Column width={11}>
+                      <Header as="h4">titulo</Header>
+                      <p>descripcion</p>
+                    </Grid.Column>
+                  </Grid>
+                </Grid.Column>
+              </Grid>
+            </div>
+          ))}
       </Container>
     );
   }
