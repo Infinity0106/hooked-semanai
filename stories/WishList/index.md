@@ -1,0 +1,3 @@
+# wishlist detail
+
+WIP

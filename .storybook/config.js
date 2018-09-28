@@ -10,8 +10,8 @@ function loadStories() {
   // require("../stories/Login/index.js");
   // require("../stories/NotFound/index.js");
   // require("../stories/Products/index.js");
-  // require("../stories/ShoppingBag/index.js");
-  // require("../stories/WishList/index.js");
+  require("../stories/ShoppingBag/index.js");
+  require("../stories/WishList/index.js");
 }
 
 configure(loadStories, module);
