@@ -153,7 +153,7 @@ class Landing extends Component {
                   </Grid.Column>
                   <Grid.Column>
                     <Header as='h2' inverted color='grey'>
-                      <Icon name='Google Play' />
+                      <Icon name='google play' />
                         <Header.Content>
                           Dowload the app
                         <Header.Subheader>For Play Store</Header.Subheader>
@@ -181,7 +181,7 @@ class Landing extends Component {
                           Locate Ivan
                           <Header.Subheader>Prol los soles #200</Header.Subheader>
                         <Header.Subheader>Torres Martel, 3 poniente</Header.Subheader>
-                        <Header.Subheader>Piso 3, Valle overflowriente</Header.Subheader>
+                        <Header.Subheader>Piso 3, Valle Oriente</Header.Subheader>
                       </Header.Content>
                     </Header>
                   </Grid.Column>
