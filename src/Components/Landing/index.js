@@ -24,9 +24,6 @@ class Landing extends Component {
     Ctrl.getInitialValues.bind(this)();
   }
   render() {
-    console.log("🛠🛠🛠🛠🛠");
-    console.log(this.props.beer);
-    console.log("🛠🛠🛠🛠🛠");
     return (
       <div>
         <div
