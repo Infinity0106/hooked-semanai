@@ -16,14 +16,15 @@ class Products extends Component {
   render() {
     return (
       <Container>
-        {this.props.logged_in && (
-          <div>
-            <Header as="h1">Recomendados para ti</Header>
-            <Grid>
-              <Product />
-            </Grid>
-          </div>
-        )}
+        {this.props.logged_in ||
+          (this.props.show_recomendation && (
+            <div>
+              <Header as="h1">Recomendados para ti</Header>
+              <Grid>
+                <Product />
+              </Grid>
+            </div>
+          ))}
         <Header as="h1">Productos</Header>
         <Grid padded centered columns={3}>
           {this.props.data.products.map((item, i) => {
