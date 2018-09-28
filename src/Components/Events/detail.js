@@ -7,7 +7,8 @@ import {
   Header,
   Dimmer,
   Loader,
-  Button
+  Button,
+  Icon
 } from "semantic-ui-react";
 import moment from "moment";
 import * as Ctrl from "./ctrl";
@@ -16,10 +17,17 @@ import Product from "./../Products/product";
 class EventoDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true
+    };
   }
   componentWillMount() {
     Ctrl.getOneEvent.bind(this)();
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      });
+    }, 500);
   }
   render() {
     if (this.props.detail_loading) {
@@ -31,6 +39,10 @@ class EventoDetail extends Component {
     } else {
       return (
         <Container>
+          <Button icon onClick={Ctrl.goBack.bind(this)}>
+            <Icon name="arrow circle left" />
+            BACK
+          </Button>
           <Header>{this.props.data.nombre}</Header>
           <Grid>
             <Grid.Column width={6}>

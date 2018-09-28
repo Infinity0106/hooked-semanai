@@ -8,10 +8,15 @@ import * as Ctrl from "./ctrl";
 class Events extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true
+    };
   }
   componentWillMount() {
     Ctrl.getInitialInfo.bind(this)();
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 500);
   }
   render() {
     return (
@@ -57,7 +62,7 @@ class Events extends Component {
                 />
               </Grid>
             </div>
-        ))}
+          ))}
       </Container>
     );
   }

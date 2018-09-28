@@ -84,3 +84,7 @@ export function addProductToEvent() {
     value: Backend.addProductToEvent(this.props.match.params.id)
   });
 }
+
+export function goBack() {
+  this.props.history.goBack();
+}
