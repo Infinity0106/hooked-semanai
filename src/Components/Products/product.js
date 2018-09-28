@@ -60,7 +60,6 @@ class Product extends Component {
 export default withRouter(
   connect(store => {
     return {
-      // data: store.nameElementStore
       logged_in: store.login.token != null
     };
   })(Product)

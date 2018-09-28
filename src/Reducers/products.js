@@ -9,9 +9,6 @@ export default (
   let newState = { ...state };
   switch (action.type) {
     case "GET_PRODUCTS_INITIAL_FULFILLED":
-      console.log("🛠🛠🛠🛠🛠");
-      console.log(action.payload[0].$id);
-      console.log("🛠🛠🛠🛠🛠");
       newState.products = action.payload;
       break;
     case "GET_PRODUCTS_PAGES_INITIAL_FULFILLED":

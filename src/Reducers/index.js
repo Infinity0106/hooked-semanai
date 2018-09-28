@@ -7,6 +7,7 @@ import shopping_bag from "./shopping_bag";
 import wishlist from "./wishlist";
 import products from "./products";
 import landing from "./landing";
+import eventos from "./eventos";
 
 export default combineReducers({
   login,
@@ -15,5 +16,6 @@ export default combineReducers({
   shopping_bag,
   wishlist,
   products,
-  landing
+  landing,
+  eventos
 });

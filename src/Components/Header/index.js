@@ -18,7 +18,9 @@ class Header extends Component {
     super(props);
     this.state = {};
   }
-  componentWillMount() {}
+  componentWillMount() {
+    Ctrl.getInitialInfo.bind(this)();
+  }
   render() {
     return (
       <Segment inverted attached basic>
@@ -46,6 +48,14 @@ class Header extends Component {
               onClick={Ctrl.menuClick.bind(this)}
             />
             <Menu.Menu position="right">
+              {this.props.exchange != 0 && (
+                <Menu.Item>
+                  <p>
+                    $1 MXN = ${(1 / this.props.exchange).toFixed(2)}
+                    USD
+                  </p>
+                </Menu.Item>
+              )}
               {!this.props.logged_in && (
                 <Button
                   basic
@@ -123,7 +133,8 @@ export default withRouter(
       logged_in: store.login.token != null,
       name: store.login.nombre,
       has_shopping_bag: store.shopping_bag.products.length > 0,
-      has_wishlist: store.wishlist.products.length > 0
+      has_wishlist: store.wishlist.products.length > 0,
+      exchange: store.header.exchange
     };
   })(Header)
 );

@@ -3,6 +3,9 @@ import faker from "faker";
 import productos from "./productos";
 import { AccessPoint } from "carbonldp/AccessPoint/AccessPoint";
 import { Header } from "carbonldp/HTTP/Header";
+import { Event } from "carbonldp/Messaging";
+import product from "./Components/Products/product";
+import axios from "axios";
 
 const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
 //seeds
@@ -100,21 +103,49 @@ const carbonldp = new CarbonLDP("https://db.itesm-03.carbonldp.com/");
 //     ele.$delete();
 //   });
 // });
-let eventos = [
-  {
-    nombre: faker.internet.userName(),
-    fecha: faker.date.future(),
-    ubicacion: `${faker.address.streetAddress()}, ${faker.address.state()}, ${faker.address.country()}`
-  }
-];
-for (let index = 0; index < 10; index++) {
-  carbonldp.documents.$createAndRetrieve("eventos/", {
-    types: ["Evento"],
-    nombre: faker.internet.userName(),
-    fecha: faker.date.future(),
-    ubicacion: `${faker.address.streetAddress()}, ${faker.address.state()}, ${faker.address.country()}`
-  });
-}
+//Eventos
+// for (let index = 0; index < 10; index++) {
+//   carbonldp.documents.$createAndRetrieve("eventos/", {
+//     types: ["Evento"],
+//     nombre: faker.internet.userName(),
+//     fecha: faker.date.future(),
+//     imagen: faker.image.imageUrl(),
+//     ubicacion: `${faker.address.streetAddress()}, ${faker.address.state()}, ${faker.address.country()}`
+//   });
+// }
+// carbonldp.documents.$getChildren("eventos/").then(ele => {
+//   ele.forEach(ele2 => {
+//     ele2.$delete();
+//   });
+// });
+// carbonldp.documents.$getChildren("eventos/").then(eventos => {
+//   eventos.forEach(ele => {
+//     ele.$create(
+//       AccessPoint.create({
+//         hasMemberRelation: "productos",
+//         isMemberOfRelation: "eventos"
+//       }),
+//       "materiales/"
+//     );
+//   });
+// });
+// carbonldp.documents.$getChildren("eventos/").then(eventos => {
+//   carbonldp.documents.$getChildren("productos/").then(productos => {
+//     eventos.forEach((ele, index) => {
+//       ele
+//         .$addMembers("materiales/", [
+//           productos[index % productos.length],
+//           productos[(index + 1) % productos.length],
+//           productos[(index + 2) % productos.length]
+//         ])
+//         .then(() => {
+//           console.log("🛠🛠🛠🛠🛠");
+//           console.log("added");
+//           console.log("🛠🛠🛠🛠🛠");
+//         });
+//     });
+//   });
+// });
 
 // carbonldp.documents.$getChildren("productos/").then(elements => {
 //   carbonldp.documents.$getChildren("tags/").then(tags => {
@@ -220,7 +251,7 @@ carbonldp.extendObjectSchema("Evento", {
     "@type": "string"
   },
   fecha: {
-    "@type": "date"
+    "@type": "dateTime"
   },
   productos: {
     "@type": "@id",
@@ -231,6 +262,9 @@ carbonldp.extendObjectSchema("Evento", {
     "@coontainer": "@set"
   },
   ubicacion: {
+    "@type": "string"
+  },
+  imagen: {
     "@type": "string"
   }
 });
@@ -336,7 +370,7 @@ export function getAllProducts(page) {
   });
 }
 
-export function getAllEvents({ page }) {
+export function getAllEvents(page) {
   return carbonldp.documents.$getChildren("eventos/", builder => {
     return builder
       .withType("Evento")
@@ -345,11 +379,12 @@ export function getAllEvents({ page }) {
         fecha: builder.inherit,
         productos: builder.inherit,
         administradores: builder.inherit,
-        ubicacion: builder.inherit,
+        materiales: builder.inherit,
+        ubicacion: builder.inherit
       })
       .limit(6)
-      .offset((page -1) *6);
-  })
+      .offset((page - 1) * 6);
+  });
 }
 
 export function getAllProductPages() {
@@ -441,4 +476,65 @@ export function getLandingProducts(tag_name) {
         .limit(6);
     }
   });
+}
+
+export function getRecomendedEvents(data) {
+  return carbonldp.documents.$executeSELECTQuery(`
+  PREFIX local: <https://db.itesm-03.carbonldp.com/vocabularies/main/#>
+
+  SELECT ?tagName (COUNT(?tagProducts) as ?countedProducts)
+ 
+ WHERE {
+   ?tag a local:Tag.
+   ?tag local:nombre ?tagName.
+   FILTER(?tagName != "").
+   
+   ?tag local:productos ?tagProducts.
+ }
+ 
+ GROUP BY ?tagName
+ ORDER BY DESC(?countedProducts)
+ LIMIT 5
+  `);
+}
+
+export function getOneEvent(id) {
+  return carbonldp.documents.$get(`eventos/${id}/`).then(evento => {
+    return Promise.all(
+      evento.productos.map(producto => {
+        producto.$resolve();
+      })
+    ).then(() => {
+      return Promise.resolve(evento);
+    });
+  });
+}
+
+export function addProductToEvent(id) {
+  return carbonldp.documents.$get(`eventos/${id}/`).then(evento => {
+    carbonldp.documents.$getChildren("productos/").then(productos => {
+      let randProd =
+        productos[Math.floor(Math.random() * productos.length + 0)];
+      evento.$addMember("materiales/", randProd);
+    });
+  });
+}
+
+export function eventDetail(id, callback) {
+  carbonldp.documents.$on(
+    Event.MEMBER_ADDED,
+    `eventos/${id}/*`,
+    message => callback(message, null),
+    error => callback(null, error)
+  );
+}
+
+export function getBeerOfTheDay() {
+  return axios.get("https://api.punkapi.com/v2/beers/random");
+}
+
+export function getExchangeRate() {
+  return axios.get(
+    "https://api.exchangeratesapi.io/latest?symbols=USD&base=MXN"
+  );
 }

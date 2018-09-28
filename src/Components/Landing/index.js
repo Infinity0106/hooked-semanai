@@ -8,7 +8,8 @@ import {
   Sidebar,
   Menu,
   Checkbox,
-  Grid
+  Grid,
+  Header
 } from "semantic-ui-react";
 import Slider from "react-slick";
 import * as Ctrl from "./ctrl";
@@ -23,6 +24,9 @@ class Landing extends Component {
     Ctrl.getInitialValues.bind(this)();
   }
   render() {
+    console.log("🛠🛠🛠🛠🛠");
+    console.log(this.props.beer);
+    console.log("🛠🛠🛠🛠🛠");
     return (
       <div>
         <div
@@ -49,9 +53,33 @@ class Landing extends Component {
             <div>
               <Image src="/banner_2.jpeg" fluid />
             </div>
-            <div>
-              <Image src="/banner_3.jpeg" fluid />
-            </div>
+            {this.props.beer && (
+              <Grid centered inverted>
+                <Container text>
+                  <Image
+                    src={this.props.beer.image_url}
+                    floated="left"
+                    style={{ maxHeight: 600 }}
+                  />
+                  <Header inverted>
+                    {this.props.beer.name}
+
+                    <Header.Subheader>
+                      {this.props.beer.contributed_by}
+                    </Header.Subheader>
+                  </Header>
+                  <p style={{ textAlign: "left" }}>
+                    {this.props.beer.description}
+                  </p>
+                  <Header as="h4" inverted>
+                    Tips:
+                  </Header>
+                  <p style={{ textAlign: "left" }}>
+                    {this.props.beer.brewers_tips}
+                  </p>
+                </Container>
+              </Grid>
+            )}
           </Slider>
         </div>
 
@@ -142,6 +170,7 @@ export default connect(store => {
   return {
     // data: store.nameElementStore
     tags: store.landing.tags,
+    beer: store.landing.beer,
     products: store.landing.products
   };
 })(Landing);

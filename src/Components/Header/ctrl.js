@@ -1,3 +1,5 @@
+import * as Backend from "./../../backend";
+
 export function logOut() {
   let self = this;
   this.props.dispatch(dispatch => {
@@ -29,4 +31,13 @@ export function accountClick(e) {
 export function logIn() {
   window.location.reload();
   this.props.history.push("/login");
+}
+
+export function getInitialInfo() {
+  this.props.dispatch(dispatch => {
+    dispatch({
+      type: "SET_EXCHANGE_RATE",
+      payload: Backend.getExchangeRate()
+    });
+  });
 }

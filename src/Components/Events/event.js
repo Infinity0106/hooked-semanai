@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, Image, Card, Icon } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 import * as Ctrl from "./ctrl";
 
 class Event extends Component {
@@ -34,11 +35,11 @@ class Event extends Component {
           <Card.Content
             extra
             as="a"
-            onClick={Ctrl.addToCart.bind(this)}
+            onClick={Ctrl.goEventDetail.bind(this)}
             textAlign="right"
           >
-            Agregar al carrito
-            <Icon name="plus cart" />
+            Ver detalles
+            <Icon name="info" />
           </Card.Content>
         </Card>
       </Grid.Column>
@@ -47,9 +48,11 @@ class Event extends Component {
   componentDidMount() {}
   componentWillUnmount() {}
 }
-export default connect(store => {
-  return {
-    // data: store.nameElementStore
-    logged_in: store.login.token != null
-  };
-})(Event);
+export default withRouter(
+  connect(store => {
+    return {
+      // data: store.nameElementStore
+      logged_in: store.login.token != null
+    };
+  })(Event)
+);
