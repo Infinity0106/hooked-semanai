@@ -56,7 +56,7 @@ class Header extends Component {
                   </p>
                 </Menu.Item>
               )}
-              {!this.props.logged_in && (
+              {(!this.props.logged_in || this.props.show_login) && (
                 <Button
                   basic
                   inverted
@@ -68,7 +68,7 @@ class Header extends Component {
                   Login
                 </Button>
               )}
-              {this.props.logged_in && (
+              {(this.props.show_login || this.props.logged_in) && (
                 <Menu.Item as="a">
                   <Icon name="heart" />
                   {this.props.has_wishlist && (
@@ -76,7 +76,7 @@ class Header extends Component {
                   )}
                 </Menu.Item>
               )}
-              {this.props.logged_in && (
+              {(this.props.show_login || this.props.logged_in) && (
                 <Menu.Item as="a">
                   <Icon name="shop" />
                   {this.props.has_shopping_bag && (
@@ -84,7 +84,7 @@ class Header extends Component {
                   )}
                 </Menu.Item>
               )}
-              {this.props.logged_in && (
+              {(this.props.show_login || this.props.logged_in) && (
                 <Dropdown
                   item
                   simple

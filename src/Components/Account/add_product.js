@@ -20,8 +20,12 @@ class AddProduct extends Component {
       <Segment raise>
         <Form>
           <Form.Field>
-            <label>Nombre del evento</label>
+            <label>Nombre del producto</label>
             <input placeholder="Nombre" type="text" />
+          </Form.Field>
+          <Form.Field>
+            <label>Imagen url</label>
+            <input placeholder="Imagen url" type="text" />
           </Form.Field>
           <Form.Field>
             <label>Categorias</label>
