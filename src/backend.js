@@ -500,13 +500,15 @@ export function getRecomendedEvents(data) {
 
 export function getOneEvent(id) {
   return carbonldp.documents.$get(`eventos/${id}/`).then(evento => {
-    return Promise.all(
-      evento.productos.map(producto => {
-        producto.$resolve();
-      })
-    ).then(() => {
-      return Promise.resolve(evento);
-    });
+    if (evento.productos) {
+      return Promise.all(
+        evento.productos.map(producto => {
+          producto.$resolve();
+        })
+      ).then(() => {
+        return Promise.resolve(evento);
+      });
+    }
   });
 }
 

@@ -16,7 +16,7 @@ class NotFound extends Component {
           <Header>
             404 - NotFound
             <Link to="/">
-              <Header.Subheader>
+              <Header.Subheader color="white">
                 Esto no existe, regresa a login
               </Header.Subheader>
             </Link>
