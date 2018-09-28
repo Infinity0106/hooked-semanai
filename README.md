@@ -36,10 +36,13 @@ yarn run storybook
 the main information is in the folder `./src`
 where you can see the router, store, reducres, components and backend files
 
--the router is the app.js and home.js (where is the redirection)
--the reducers are the store objects that existe this are for models in the database or they can also be for states in the application
--the components folder structure is where the magic happens, you have the index that is the main component, sometime you can have sub-components that are in another js file, but mainly the component logic goes to the ctrl.js file this communicate with the backend file and updates the stores via reducres and actions in redux
--the backend file stores all actions made to carbon like seeding and also the queries executed
+- the router is the app.js and home.js (where is the redirection)
+
+- the reducers are the store objects that existe this are for models in the database or they can also be for states in the application
+
+- the components folder structure is where the magic happens, you have the index that is the main component, sometime you can have sub-components that are in another js file, but mainly the component logic goes to the ctrl.js file this communicate with the backend file and updates the stores via reducres and actions in redux
+
+- the backend file stores all actions made to carbon like seeding and also the queries executed
 
 NOTE:
 you have stories folder which stores the components documentation
