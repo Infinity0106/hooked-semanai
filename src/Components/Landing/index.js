@@ -9,7 +9,8 @@ import {
   Menu,
   Checkbox,
   Grid,
-  Header
+  Header,
+  Inverted
 } from "semantic-ui-react";
 import Slider from "react-slick";
 import * as Ctrl from "./ctrl";
@@ -122,37 +123,80 @@ class Landing extends Component {
         <Grid inverted padded>
           <Grid.Row color="black">
             <Grid.Column width={3}>
-              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+              <Image src='https://romti.com.mx/wp-content/uploads/2018/05/cmo-empezar-tu-negocio-en-el-e-commerce.jpg' size='medium' rounded/>
             </Grid.Column>
             <Grid.Column width={10}>
               <Grid columns="three" divided>
                 <Grid.Row>
                   <Grid.Column>
-                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                    <Header as='h2' inverted color='grey'>
+                      <Icon name="contao" />
+                        <Header.Content >
+                          Mario's contact
+                        <Header.Subheader>Phone 8120283127</Header.Subheader>
+                      <Header.Subheader>Mail mrio@ecommerce.com</Header.Subheader>
+                      </Header.Content>
+                    </Header>
                   </Grid.Column>
                   <Grid.Column>
-                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                     <Header as='h2' inverted color='grey'>
+                      <Icon name='location arrow' />
+                        <Header.Content>
+                          Locate Mario
+                          <Header.Subheader>Av Eugenio Garza Sada</Header.Subheader>
+                        <Header.Subheader>2501 sur, Mty, Nuevo Leon</Header.Subheader>
+                      </Header.Content>
+                    </Header>
                   </Grid.Column>
                   <Grid.Column>
-                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                    <Header as='h2' inverted color='grey'>
+                      <Icon name='google play' />
+                        <Header.Content>
+                          Dowload the app
+                        <Header.Subheader>For Play Store</Header.Subheader>
+                        <Header.Subheader>Easiest way to buy</Header.Subheader>
+                      </Header.Content>
+                    </Header>
                   </Grid.Column>
                 </Grid.Row>
 
                 <Grid.Row>
                   <Grid.Column>
-                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                    <Header as='h2' inverted color='grey'>
+                      <Icon name="contao" />
+                        <Header.Content >
+                          Ivan's contact
+                        <Header.Subheader>Phone 8100113227</Header.Subheader>
+                      <Header.Subheader>Mail ivan@ecommerce.com</Header.Subheader>
+                      </Header.Content>
+                    </Header>
                   </Grid.Column>
                   <Grid.Column>
-                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                    <Header as='h2' inverted color='grey'>
+                      <Icon name='location arrow' />
+                        <Header.Content>
+                          Locate Ivan
+                          <Header.Subheader>Prol los soles #200</Header.Subheader>
+                        <Header.Subheader>Torres Martel, 3 poniente</Header.Subheader>
+                        <Header.Subheader>Piso 3, Valle Oriente</Header.Subheader>
+                      </Header.Content>
+                    </Header>
                   </Grid.Column>
                   <Grid.Column>
-                    <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                    <Header as='h2' inverted color='grey'>
+                      <Icon name='apple' />
+                        <Header.Content>
+                          Dowload the app
+                        <Header.Subheader>For IOS</Header.Subheader>
+                        <Header.Subheader>Keep it simple</Header.Subheader>
+                      </Header.Content>
+                    </Header>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+              <Image src='https://mglobalmarketing.es/wp-content/uploads/2017/11/eCommerce.jpg' size='medium' rounded/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
