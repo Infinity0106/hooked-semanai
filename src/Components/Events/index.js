@@ -47,21 +47,13 @@ class Events extends Component {
         {this.props.logged_in && (
           <div>
             <Header as="h1">Recomendados para ti</Header>
-            <Grid columns={2} divided>
-              <Grid.Column>
-                <Grid as="a">
-                  <Grid.Column width={5}>
-                    <Image
-                      src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png"
-                      avatar
-                    />
-                  </Grid.Column>
-                  <Grid.Column width={11}>
-                    <Header as="h4">titulo</Header>
-                    <p>descripcion</p>
-                  </Grid.Column>
-                </Grid>
-              </Grid.Column>
+            <Grid padded centered columns={2}>
+              <Event
+                name={null}
+                tags={"Ropa"}
+                desc={"3634 Goldner Route, Maryland, Turkmenistan 11/10/2018"}
+                image={null}
+              />
             </Grid>
           </div>
         )}
