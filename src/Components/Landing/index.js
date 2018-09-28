@@ -137,7 +137,7 @@ class Landing extends Component {
                         <Header.Content >
                           Mario's contact
                         <Header.Subheader>Phone 8120283127</Header.Subheader>
-                      <Header.Subheader>Mail mario@ecommerce.com</Header.Subheader>
+                      <Header.Subheader>Mail mrio@ecommerce.com</Header.Subheader>
                       </Header.Content>
                     </Header>
                   </Grid.Column>
@@ -153,7 +153,7 @@ class Landing extends Component {
                   </Grid.Column>
                   <Grid.Column>
                     <Header as='h2' inverted color='grey'>
-                      <Icon name='google play' />
+                      <Icon name='Google Play' />
                         <Header.Content>
                           Dowload the app
                         <Header.Subheader>For Play Store</Header.Subheader>
@@ -191,7 +191,7 @@ class Landing extends Component {
                         <Header.Content>
                           Dowload the app
                         <Header.Subheader>For IOS</Header.Subheader>
-                        <Header.Subheader>Keep simple</Header.Subheader>
+                        <Header.Subheader>Keep it simple</Header.Subheader>
                       </Header.Content>
                     </Header>
                   </Grid.Column>
